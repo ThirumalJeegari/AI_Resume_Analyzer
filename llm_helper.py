@@ -4,10 +4,10 @@ from dotenv import load_dotenv
 
 load_dotenv()  # IMPORTANT
 
-api_key = os.getenv("GROQ_API_KEY")
-
+import streamlit as st
+api_key = st.secrets.get("GROQ_API_KEY") or os.getenv("GROQ_API_KEY")
 if not api_key:
-    raise ValueError("GROQ_API_KEY is missing. Please set it in .env file")
+    raise ValueError("GROQ_API_KEY is missing. Add it in Streamlit Cloud Secrets.")
 
 client = Groq(api_key=api_key)
 
